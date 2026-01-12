@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
           </div>
           <div>
             <a href="#inquiry" onClick={(e) => handleNavClick(e, 'inquiry')} className="bg-purple-600 text-white px-7 py-3 rounded-full text-[15px] font-black hover:bg-purple-700 transition-all shadow-xl shadow-purple-200 active:scale-95">
-              무료 상담 받기
+              지금 바로 문의하기
             </a>
           </div>
         </div>
@@ -64,7 +64,7 @@ const Footer: React.FC = () => (
     <div className="max-w-7xl mx-auto px-4 text-center">
       <div className="mb-8">
         <span className="text-2xl font-black text-white tracking-widest uppercase italic">BARA DESIGN</span>
-        <p className="mt-4 text-purple-200/60 max-w-md mx-auto leading-relaxed">디자인은 비즈니스의 언어입니다. 고객의 성공을 위해 목적이 분명한 디자인을 제안합니다.</p>
+        <p className="mt-4 text-purple-200/60 max-w-md mx-auto leading-relaxed font-medium">비즈니스의 가치를 디자인으로 증명합니다.<br/>목적이 분명한 디자인으로 당신의 성공을 돕습니다.</p>
       </div>
       <div className="w-full h-px bg-purple-900 my-10"></div>
       <p className="text-sm opacity-80">© 2024 BARA DESIGN. All rights reserved.</p>
@@ -131,7 +131,6 @@ const PortfolioModal: React.FC<{ item: PortfolioItem; onClose: () => void }> = (
 };
 
 const LandingPage: React.FC<{ content: SiteContent }> = ({ content }) => {
-  const [formData, setFormData] = useState<InquiryFormData>({ name: '', contact: '', type: '', schedule: '', budget: '', message: '' });
   const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioItem | null>(null);
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
@@ -149,12 +148,6 @@ const LandingPage: React.FC<{ content: SiteContent }> = ({ content }) => {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('문의가 접수되었습니다. 곧 연락드리겠습니다!');
-    setFormData({ name: '', contact: '', type: '', schedule: '', budget: '', message: '' });
-  };
-
   return (
     <div className="bg-white">
       <Navbar />
@@ -163,20 +156,19 @@ const LandingPage: React.FC<{ content: SiteContent }> = ({ content }) => {
       <section id="hero" className="relative overflow-hidden pt-40 pb-32 md:pt-60 md:pb-72">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-5xl mx-auto">
-            <span className="inline-block px-5 py-2 rounded-full bg-purple-50 text-purple-600 text-xs font-black mb-8 tracking-[0.3em] uppercase animate-fade-in">BARA DESIGN / PREMIUM STUDIO</span>
-            <h1 className="text-5xl md:text-8xl font-black text-slate-950 mb-10 leading-[1.1] tracking-tighter whitespace-pre-line animate-slide-up">
+            <span className="inline-block px-5 py-2 rounded-full bg-purple-50 text-purple-600 text-xs font-black mb-8 tracking-[0.3em] uppercase">BARA DESIGN / PREMIUM STUDIO</span>
+            <h1 className="text-5xl md:text-8xl font-black text-slate-950 mb-10 leading-[1.1] tracking-tighter whitespace-pre-line">
               {content.heroTitle}
             </h1>
             <p className="text-xl md:text-2xl text-slate-500 mb-14 max-w-3xl mx-auto leading-relaxed font-medium">
               {content.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <CTAButton text="카카오톡 실시간 상담" primary href="#inquiry" onClick={(e) => handleScrollTo(e, 'inquiry')} />
-              <CTAButton text="포트폴리오 라이브러리" href="#portfolio" onClick={(e) => handleScrollTo(e, 'portfolio')} />
+              <CTAButton text="문의하기 (010-7222-4594)" primary href="#inquiry" onClick={(e) => handleScrollTo(e, 'inquiry')} />
+              <CTAButton text="포트폴리오 보러가기" href="#portfolio" onClick={(e) => handleScrollTo(e, 'portfolio')} />
             </div>
           </div>
         </div>
-        {/* Abstract Background Shapes */}
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[1000px] h-[1000px] bg-purple-50 rounded-full blur-[120px] opacity-70 -z-10 animate-pulse-slow"></div>
         <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/4 w-[800px] h-[800px] bg-indigo-50/50 rounded-full blur-[100px] opacity-60 -z-10"></div>
       </section>
@@ -305,7 +297,7 @@ const LandingPage: React.FC<{ content: SiteContent }> = ({ content }) => {
         </div>
       </section>
 
-      {/* Final Form */}
+      {/* Final Contact Section */}
       <section id="inquiry" className="py-32 bg-white relative overflow-hidden">
          <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col lg:flex-row gap-20 items-center">
             <div className="flex-1 text-center lg:text-left">
@@ -313,30 +305,34 @@ const LandingPage: React.FC<{ content: SiteContent }> = ({ content }) => {
                 당신의 브랜드를<br/> 
                 <span className="text-purple-600 underline underline-offset-8 decoration-purple-100">가장 돋보이게</span> 
               </h2>
-              <p className="text-slate-500 text-xl md:text-2xl mb-14 font-medium">지금 바로 무료 상담을 신청하고 성공을 위한 첫걸음을 떼어보세요.</p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                <a href="#" className="bg-[#FAE100] text-[#371701] px-10 py-5 rounded-2xl font-black flex items-center justify-center gap-4 hover:brightness-95 transition-all shadow-xl active:scale-95"> 
-                   <span className="text-2xl">💬</span> 카카오톡으로 즉시 상담 
-                </a>
-              </div>
+              <p className="text-slate-500 text-xl md:text-2xl mb-14 font-medium">BARA DESIGN은 항상 열려있습니다.<br/>비즈니스의 가치를 높여줄 최적의 디자인 파트너를 만나보세요.</p>
             </div>
             <div className="flex-1 w-full bg-purple-50/50 p-12 rounded-[3.5rem] shadow-2xl border border-purple-100/50 backdrop-blur-sm">
-              <h3 className="text-3xl font-black text-purple-950 mb-10 text-center">문의하기</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <input type="text" placeholder="성함 / 업체명" required className="w-full px-6 py-5 bg-white border-none rounded-[1.5rem] focus:ring-4 focus:ring-purple-200 outline-none font-bold" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-                  <input type="tel" placeholder="연락처" required className="w-full px-6 py-5 bg-white border-none rounded-[1.5rem] focus:ring-4 focus:ring-purple-200 outline-none font-bold" value={formData.contact} onChange={e => setFormData({...formData, contact: e.target.value})} />
+              <h3 className="text-3xl font-black text-purple-950 mb-10 text-center">문의 및 상담</h3>
+              
+              <div className="space-y-8">
+                {/* Contact Items */}
+                <div className="bg-white p-8 rounded-3xl shadow-sm flex items-center gap-6 group hover:shadow-md transition-all">
+                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">📱</div>
+                  <div>
+                    <p className="text-slate-400 font-black text-[10px] uppercase tracking-widest mb-1">Inquiry Contact</p>
+                    <p className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">010-7222-4594</p>
+                  </div>
                 </div>
-                <select className="w-full px-6 py-5 bg-white border-none rounded-[1.5rem] focus:ring-4 focus:ring-purple-200 outline-none font-bold text-slate-400" value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})}>
-                  <option value="">의뢰 품목 선택</option>
-                  <option value="전단/리플렛">전단 / 리플렛</option>
-                  <option value="포스터/배너">포스터 / 배너</option>
-                  <option value="SNS이미지">SNS 홍보 이미지</option>
-                  <option value="상세페이지">상세페이지</option>
-                  <option value="기타">기타 문의</option>
-                </select>
-                <button type="submit" className="w-full bg-purple-600 text-white py-6 rounded-[1.5rem] font-black text-xl hover:bg-purple-700 transition-all shadow-xl shadow-purple-200 active:scale-95">신청 완료</button>
-              </form>
+
+                <div className="bg-white p-8 rounded-3xl shadow-sm flex items-center gap-6 group hover:shadow-md transition-all">
+                  <div className="w-16 h-16 bg-[#FAE100] rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">💬</div>
+                  <div>
+                    <p className="text-slate-400 font-black text-[10px] uppercase tracking-widest mb-1">KakaoTalk ID</p>
+                    <p className="text-2xl md:text-3xl font-black text-[#371701] tracking-tight">haram0226</p>
+                  </div>
+                </div>
+
+                <div className="text-center pt-4">
+                  <p className="text-slate-400 text-sm font-medium">업무 시간: 평일 09:00 - 18:00 (주말 및 공휴일 휴무)</p>
+                  <p className="text-purple-600 text-xs mt-2 font-black italic">상담 요청 시 빠르게 회신 드립니다.</p>
+                </div>
+              </div>
             </div>
          </div>
          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-100 rounded-full blur-[150px] opacity-30 -translate-y-1/2 translate-x-1/2 -z-10"></div>
@@ -403,7 +399,6 @@ const AdminPanel: React.FC<{ content: SiteContent; setContent: (c: SiteContent) 
       </header>
 
       <main className="max-w-6xl mx-auto px-6 mt-16 space-y-16">
-        {/* Editor Sections... (Keeping logic but making it cleaner) */}
         <section className="bg-white p-12 rounded-[3rem] shadow-sm border border-slate-200">
           <h2 className="text-3xl font-black mb-10 border-b pb-6 flex items-center gap-4">
             <span className="w-3 h-10 bg-purple-500 rounded-full"></span>
@@ -415,7 +410,6 @@ const AdminPanel: React.FC<{ content: SiteContent; setContent: (c: SiteContent) 
           </div>
         </section>
 
-        {/* Portfolio Editor */}
         <section className="bg-white p-12 rounded-[3rem] shadow-sm border border-slate-200">
           <div className="flex justify-between items-center mb-10 border-b pb-6">
             <h2 className="text-3xl font-black flex items-center gap-4">
@@ -458,14 +452,12 @@ const AdminPanel: React.FC<{ content: SiteContent; setContent: (c: SiteContent) 
           </div>
         </section>
 
-        {/* Other Sections Management... Simplified but powerful */}
         <section className="bg-white p-12 rounded-[3rem] shadow-sm border border-slate-200">
            <h2 className="text-3xl font-black mb-10 border-b pb-6 flex items-center gap-4">
             <span className="w-3 h-10 bg-purple-500 rounded-full"></span>
             기타 콘텐츠 일괄 관리
           </h2>
           <div className="grid lg:grid-cols-2 gap-12">
-             {/* Process Step Editor */}
              <div className="space-y-6">
                 <h3 className="font-black text-slate-400 uppercase tracking-widest text-xs mb-4">작업 프로세스 (5단계)</h3>
                 {content.processes.map((p, i) => (
@@ -479,7 +471,6 @@ const AdminPanel: React.FC<{ content: SiteContent; setContent: (c: SiteContent) 
                 ))}
              </div>
 
-             {/* Testimonials Editor */}
              <div className="space-y-6">
                 <h3 className="font-black text-slate-400 uppercase tracking-widest text-xs mb-4">고객 후기 롤링 보드</h3>
                 <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
@@ -511,11 +502,10 @@ const AdminPanel: React.FC<{ content: SiteContent; setContent: (c: SiteContent) 
 const App: React.FC = () => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
-      const saved = localStorage.getItem('site_content_bara_v2');
+      const saved = localStorage.getItem('site_content_bara_v3');
       if (!saved) return INITIAL_CONTENT;
       
       const parsed = JSON.parse(saved);
-      // Basic validation to ensure all required fields exist
       if (!parsed.heroTitle || !parsed.portfolio || !parsed.processes) return INITIAL_CONTENT;
       
       return parsed;
@@ -526,7 +516,7 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem('site_content_bara_v2', JSON.stringify(content));
+    localStorage.setItem('site_content_bara_v3', JSON.stringify(content));
   }, [content]);
 
   return (
